@@ -2,7 +2,9 @@
 
 ## MIPS Architecture
 
-32 32-bit general purpose registers.
+# Register usage
+
+MIPS uses 32 32-bit general-purpose registers.
 
 | Register Number | Register Name | Function | 
 | ---             | ---           | ---      |
