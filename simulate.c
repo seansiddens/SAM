@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <inttypes.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -12,6 +13,14 @@
 // ----------------------------------------------------------------------------
 // Utility functions
 // ----------------------------------------------------------------------------
+
+//
+// Returns the bits in the range [start, stop] of a uint32_t.
+//
+static inline uint32_t get_bits(uint32_t x, uint8_t start, uint8_t end) {
+    uint64_t mask = ((uint64_t)1 << (end - start + 1)) - 1;
+    return (x >> start) & mask;
+}
 
 // Memory
 uint8_t MEM[MEMORY_SIZE] = {0};
@@ -58,15 +67,15 @@ uint32_t REGS[32] = {0};
 //
 // Fetches the machine code instruction pointed to by the program counter.
 //
-// Data is layed out in little endian byte order: 
+// Data is layed out in little endian byte order:
 // 4|        | <-- PC + 4 (next instruction)
 // 3|  MSBs  |
-// 2|xxxxxxxx|   
-// 1|xxxxxxxx|   
+// 2|xxxxxxxx|
+// 1|xxxxxxxx|
 // 0|  LSBs  | <-- PC
 //
 static inline uint32_t fetch_instruction(uint32_t PC) {
-    // Instructions are 32 bits wide, but the memory is byte addressable. 
+    // Instructions are 32 bits wide, but the memory is byte addressable.
     // Casting the u8 pointer into memory to u32 fetches the 4 bytes we need.
     return *((uint32_t *)(MEM + PC));
 }
@@ -88,7 +97,8 @@ int main(void) {
 
     uint32_t instruction = fetch_instruction(PC);
 
-    printf("%x\n", instruction);
+    uint32_t bits = get_bits(instruction, 0, 31);
+    printf("%x\n", bits);
 
     return 0;
 }
