@@ -27,18 +27,31 @@ MIPS uses 32 32-bit general-purpose registers.
 ### Memory Layout
 
 Reserved    : 0xffff 0010 -> 0xffff ffff -
+
 MMIO        : 0xffff 0000 -> 0xffff 000f |  Kernel Level
+
 Kernel Data : 0x9000 0000 -> 0xfffe ffff | 
+
 Kernel Text : 0x8000 0000 -> 0x8fff ffff -
+
 Stack       : 0x7fff ffff                -
+
                     |                    |
+
                     v                    | 
+
                                          |  
+
                     ^                    |  User Level 
+
                     |                    | 
+
 Dynamic Data: 0x1000 8000                | 
+
 Static Data : 0x1000 0000 -> 0x1000 7fff | 
+
 Program Text: 0x0040 0000 -> 0x0fff ffff - 
+
 Reserved    : 0x0000 0000 -> 0x003f ffff -  Kernel Level
 
 
