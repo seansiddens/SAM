@@ -27,7 +27,7 @@ MIPS uses 32 32-bit general-purpose registers.
 ### Memory Layout
 
 | Description      | Address start | Address end |
-| ---              | ;---;         | ---         | 
+| ---              | ---           | ---         | 
 | Reserved         | 0xffff 0010   | 0xffff ffff | 
 | Memory Mapped IO | 0xffff 0000   | 0xffff 000f |
 | Kernel Data      | 0x9000 0000   | 0xfffe ffff |
